@@ -1,6 +1,7 @@
 import express from 'express';
 import got from 'got';
 import config from './config';
+import Issue from './types/issue';
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.get('/*', async (req, res) => {
   const { search, pathname } = new URL(req.url, BASE_URL);
 
   try {
-    const data = await got
+    const data: Issue = await got
       .get(
         `https://api.github.com/repos${pathname}/issues${search ? search : ''}`,
         {
